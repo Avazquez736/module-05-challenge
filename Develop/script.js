@@ -1,12 +1,17 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
+let days= ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+let months = ['January','February','March','April','May','June','July','August','September','October','November','December']
+
 let time = function(){
+  let date = new Date();
+  let dayName = days[date.getDay()]
+  let monthName = months[date.getMonth()]
 
-let dt = new Date();
-$("#currentDay").html(dt.toLocaleString())
+  let format = `${dayName}, ${monthName} ${date.getDate()}, ${date.getFullYear()}`
+  $('#currentDay').html(format)
 }
-
 setInterval(time,100)
 
 $(function () {
@@ -28,4 +33,4 @@ $(function () {
   // attribute of each time-block be used to do this?
   //
   // TODO: Add code to display the current date in the header of the page.
-});
+})
