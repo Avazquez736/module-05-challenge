@@ -19,18 +19,4 @@
   // TODO: Add code to display the current date in the header of the page.
  
 
-setInterval(time,100)
-let current = new Date
-let hour= current.getHours() 
-let days= ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-let months = ['January','February','March','April','May','June','July','August','September','October','November','December']
 
-let time = function(){
-  let date = new Date();
-  let dayName = days[date.getDay()]
-  let monthName = months[date.getMonth()]
-
-  let format = `${dayName}, ${monthName} ${date.getDate()}, ${date.getFullYear()}`
-  $('#currentDay').html(format)
-}
-setInterval(time,100)
