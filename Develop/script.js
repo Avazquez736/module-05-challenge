@@ -1,3 +1,4 @@
+// id's variables
 let nine = $("#9");
 let ten = $("#10");
 let eleven = $("#11");
@@ -9,18 +10,19 @@ let four = $("#16");
 let five = $("#17");
 let six = $("#18");
 let seven = $("#19");
-let hour = moment().format('k');
+let hour = moment().format('kk');
+let btnClicked = $(".saveBtn");
+let saveBttn = $(".btn");
 
-console.log(`Hour:${hour}`)
-// Date and Hour
 
+
+//date
 let clock = setInterval(() => {
   let moment1 = moment();
   $('#currentDay').html(`${moment1.format('dddd')} ${moment1.format(' MMMM DD YYYY')} `)
 }, 100);
 
-
-
+//array of id's
 let timesArray = [
     nine,
     ten,
@@ -34,9 +36,8 @@ let timesArray = [
     six,
     seven,
 ];
-console.log(nine.attr("data-time"))
 
-    // For coloring the past, present, and future time blocks
+//function to change background-color based on hour
 function changeColor(){
     for (let i = 0; i < timesArray.length; i++) {
         timesArray[i].removeClass("past future present");
@@ -53,12 +54,28 @@ function changeColor(){
         }
     }
   }
-
-// textarea elements
-
-
-
 changeColor();
 
+//saved locale storage
+function savedData() {
+  for (let el of timesArray) {
+      el.val(localStorage.getItem("timeBlock " + el.data("time")));
 
-// render schedule saved in local storage
+  }
+}
+savedData()
+
+// handles clicks
+function submit(event) {
+  event.preventDefault();
+
+  let click = $(event.currentTarget);
+
+  let placeText = click.siblings("textarea");
+
+  let targetBlock = placeText.data("time");
+
+  localStorage.setItem("timeBlock " +  targetBlock, placeText.val());
+}
+
+saveBttn.on("click", submit);
